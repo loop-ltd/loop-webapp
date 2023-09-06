@@ -19,14 +19,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
+        header: ["'Oswald'", ...defaultTheme.fontFamily.sans],
+        sans: ["'DM Sans'", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         loop: {
           500: "#a3dacc", //hsl(165, 42.6%, 74.7%)
           600: "#8be1cc", //hsl(165, 58.9%, 71.4%)
         },
-        loopGray: {
+        loopgray: {
           900: "f5f7f8", //hsl(200, 33.3%, 96.7%)
           500: "#434343", //hsl(0, 0%, 31.4%)
           100: "#1a1a1a", //hsl(0, 0%, 10.6%)
