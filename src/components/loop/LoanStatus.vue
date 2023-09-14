@@ -1,44 +1,12 @@
 <script setup>
   import {computed} from "vue"
 
-  const total = 400000
-  const paid = 125000
-  const looped = 40000
-
-  /*
-  const paidPath = computed(() => {
-    if (total === 0) return
-    const paidPercentage = paid / total
-    const paidAngle = paidPercentage * Math.PI * 2
-    const startAngle = 0
-    const endAngle = startAngle + paidAngle
-
-    const outerStart = {
-      y: 50 - Math.cos(startAngle) * 50,
-      x: Math.sin(startAngle) * 50 + 50,
-    }
-    const innerStart = {
-      y: 50 - Math.cos(startAngle) * 40,
-      x: Math.sin(startAngle) * 40 + 50,
-    }
-
-    const outerEnd = {
-      y: 50 - Math.cos(endAngle) * 50,
-      x: Math.sin(endAngle) * 50 + 50,
-    }
-
-    const innerEnd = {
-      y: 50 - Math.cos(endAngle) * 40,
-      x: Math.sin(endAngle) * 40 + 50,
-    }
-
-    return `M ${outerStart.x} ${outerStart.y} A 50 50 0 ${
-      paidAngle > Math.PI ? 1 : 0
-    } 1 ${outerEnd.x} ${outerEnd.y} L ${innerEnd.x} ${innerEnd.y} A 40 40 0 ${
-      paidAngle > Math.PI ? 1 : 0
-    } 0 ${innerStart.x} ${innerStart.y} z`
-  })
-  */
+  const total = 40000
+  const paid = 17500
+  const yourself = 1364
+  const supporters = 2764
+  const looped = yourself + supporters
+  const unpaid = total - paid - looped
 
   const paidPath = computed(() => {
     if (total === 0) return
@@ -94,7 +62,7 @@
 </script>
 <template>
   <div class="flex items-center justify-between">
-    <div class="w-[200px] h-[200px]">
+    <div class="relative w-[200px] h-[200px]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
@@ -110,21 +78,51 @@
         <!--
         M50 0 A 50 50 0 1 1 0 50 
       --></svg>
+      <div class="absolute inset-0 flex flex-col items-center justify-center">
+        <div class="text-uigray-500 text-xl">Loan</div>
+        <div class="flex items-center justify-evenly divide-x">
+          <div class="flex flex-col space-y-1 items-center p-2">
+            <div class="text-uigray-500 text-base">Repaid</div>
+
+            <div class="text-uigray-900 text-base font-bold">
+              &pound;{{ (paid + looped).toLocaleString() }}
+            </div>
+          </div>
+          <div class="flex flex-col space-y-1 items-center p-2">
+            <div class="text-uigray-500 text-base">Unpaid</div>
+            <div class="text-uigray-900 text-base font-bold">
+              &pound;{{ unpaid.toLocaleString() }}
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center border-t">
+          <div class="text-uigray-500 text-sm">Rewards</div>
+          <div class="text-uigray-900 text-xl font-bold">
+            &pound;{{ looped.toLocaleString() }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="flex flex-col space-y-4 items-stretch">
       <div
         class="rounded-md bg-loop-300 flex flex-col space-y-2 items-center px-4 py-2">
         <div class="text-uigray-900 text-xs font-bold">Loan Amount</div>
-        <div class="text-uigray-900 text-sm font-bold">&pound;400,000</div>
+        <div class="text-uigray-900 text-sm font-bold">
+          &pound;{{ total.toLocaleString() }}
+        </div>
       </div>
       <div
         class="rounded-md bg-loop-500 flex flex-col space-y-1 items-center px-4 py-2">
         <div class="text-white text-xs font-bold">Your cashback</div>
-        <div class="text-white text-sm font-bold">&pound;1,120.21</div>
+        <div class="text-white text-sm font-bold">
+          &pound;{{ yourself.toLocaleString() }}
+        </div>
         <div class="text-white text-xs font-bold text-center">
           Total supporters<br />cashback
         </div>
-        <div class="text-white text-sm font-bold">&pound;2,813</div>
+        <div class="text-white text-sm font-bold">
+          &pound;{{ supporters.toLocaleString() }}
+        </div>
       </div>
     </div>
   </div>
